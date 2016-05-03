@@ -8,7 +8,7 @@ A list of package I have installed on my system
 
 * [atom-editor](https://github.com/atom/atom)
 * [dunst](http://www.knopwob.org/dunst/)
-* [etckeeper](http://kitenet.net/~joey/code/etckeeper/)
+* [etckeeper](http://etckeeper.branchable.com/)
 * [feh](http://www.knopwob.org/dunst/)
 * [fzf](https://github.com/junegunn/fzf)
 * [i3](http://i3wm.org/)
