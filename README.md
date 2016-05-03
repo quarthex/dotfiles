@@ -11,7 +11,7 @@ A list of package I have installed on my system
 * [feh](http://www.knopwob.org/dunst/)
 * [fzf](https://github.com/junegunn/fzf)
 * [i3](http://i3wm.org/)
-* [numlockx](http://home.kde.org/~seli/numlockx/)
+* numlockx
 * [pidgin](http://pidgin.im/)
 * [purple-facebook](https://github.com/jgeboski/purple-facebook)
 * [redshift](http://jonls.dk/redshift/)
