@@ -1,0 +1,224 @@
+#!/usr/bin/python
+
+import imaplib
+import json
+import locale
+import sys
+import subprocess
+import threading
+import time
+
+
+class Usage:
+
+    def __init__(self, used, total):
+        assert 0 <= used <= total
+        self._used = used
+        self._total = total
+
+    def used(self):
+        return self._used
+
+    def percent(self):
+        return self._used * 100 // self._total
+
+    def json(self, prefix):
+        return {
+            'full_text': '{0} {1:02d}%'.format(prefix, self.percent())
+        }
+
+
+class DiffUsage:
+
+    def __init__(self):
+        self._usage = None
+        self._used = 0
+        self._total = 0
+
+    def push(self, used, total):
+        assert 0 <= used <= total
+        assert used >= self._used
+        assert total >= self._total
+        self._usage = Usage(used - self._used, total - self._total)
+        self._used = used
+        self._total = total
+        return self._usage
+
+
+class CpuUsage:
+
+    def __init__(self):
+        self._usage = DiffUsage()
+
+    def usage(self):
+        with open('/proc/stat') as stat:
+            stat = stat.readline().split()
+            assert len(stat) >= 5
+            assert stat[0] == 'cpu'
+            stat = [int(x) for x in stat[1:5]]
+            user, nice, system, idle = stat
+            used = user + nice + system
+            total = used + idle
+            return self._usage.push(used, total)
+
+    def json(self):
+        return self.usage().json('cpu')
+
+
+class MemoryUsage():
+
+    def usage(self):
+        with open('/proc/meminfo') as meminfo:
+            total = meminfo.readline().strip()
+            assert total.startswith('MemTotal: ')
+            assert total.endswith(' kB')
+            total = int(total.split()[1])
+
+            meminfo.readline()
+
+            available = meminfo.readline().strip()
+            assert available.startswith('MemAvailable: ')
+            assert available.endswith(' kB')
+            available = int(available.split()[1])
+
+            return Usage(total - available, total)
+
+    def json(self):
+        return self.usage().json('mem')
+
+
+class NetworkUsage():
+
+    def __init__(self, dev):
+        self._dev = dev
+        self._total = 0
+        self._max = 0
+
+    def total(self):
+        with open('/proc/net/dev') as dev:
+            dev.readline()
+            dev.readline()
+            for line in dev:
+                line = line.strip()
+                if line.startswith(self._dev + ': '):
+                    return int(line.split()[1])
+
+    def usage(self):
+        total = self.total()
+        try:
+            if self._total:
+                diff = total - self._total
+                if diff > self._max:
+                    self._max = diff
+                return Usage(diff, self._max)
+        finally:
+            self._total = total
+
+    def json(self):
+        usage = self.usage()
+        if usage:
+            return {
+                'full_text': '{0} {1:03d}K'.format(self._dev, usage.used() // 1024),
+            }
+
+
+class Imap:
+
+    def __init__(self, label, host, user, password, mailboxes=None, ssl=False, delay=3600):
+        self._label = label
+        self._host = host
+        self._user = user
+        self._password = password
+        self._mailboxes = mailboxes or ['INBOX']
+        self._ssl = ssl
+        self._delay = delay
+        self._unseen = 0
+        self._timer = None
+        thread = threading.Thread(target=self._update)
+        thread.start()
+
+    def _update(self):
+        self._timer = threading.Timer(self._delay, self._update)
+        self._timer.start()
+
+        if self._ssl:
+            con = imaplib.IMAP4_SSL
+        else:
+            con = imaplib.IMAP4
+        con = con(self._host)
+        con.login(self._user, self._password)
+        unseen = 0
+        for mbox in self._mailboxes:
+            con.select(mbox)
+            res = con.search(None, 'UNSEEN')[1][0]
+            if res:
+                unseen += len(res.decode('ascii').split(' '))
+        con.logout()
+        self._unseen = unseen
+
+    def json(self):
+        if self._unseen:
+            return {
+                'full_text': '{0} {1}'.format(self._label, self._unseen),
+                'urgent': True
+            }
+
+
+class DateTime:
+
+    def __init__(self):
+        locale.resetlocale()
+
+    def json(self):
+        return {'full_text': time.strftime('%a %e %b %H:%M:%S')}
+
+
+
+class AudioVolume:
+
+    def __init__(self):
+        self._tic = -1
+        self._prev = None
+
+    def json(self):
+        if self._tic % 5 == 0:
+            vol = self._vol
+        else:
+            vol = self.volume()
+            self._vol = vol
+        self._tic += 1
+        if vol == 0:
+            return {'full_text': 'mute', 'urgent': True}
+        else:
+            return {'full_text': 'snd {0:02d}%'.format(vol)}
+
+
+    @staticmethod
+    def volume():
+        amixer = subprocess.Popen(['amixer', 'get', 'Master'],
+                                  stdout=subprocess.PIPE)
+        stdout, _ = amixer.communicate()
+        line = stdout.split(b'\n')[-2].split(b' ')
+        if line[-1] == b'[off]':
+            return 0
+        else:
+            return int(line[-3][1:-2])
+
+
+if __name__ == '__main__':
+    status = []
+    status.append(CpuUsage())
+    status.append(NetworkUsage('enp2s3'))
+    status.append(MemoryUsage())
+    status.append(AudioVolume())
+    status.append(Imap('gml', 'imap.gmail.com', '<user>', '<password>', ssl=True, delay=60))
+    status.append(DateTime())
+
+    sys.stdout.write('{"version": 1}\n[\n')
+
+    while True:
+        st = [x.json() for x in status]
+        st = [x for x in st if x is not None]
+        sys.stdout.write(json.dumps(st) + ',\n')
+        sys.stdout.flush()
+        time.sleep(1)
