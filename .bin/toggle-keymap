@@ -1,0 +1,17 @@
+#!/bin/sh
+
+choose() {
+  (
+    echo azerty
+    echo bépo
+  ) | dmenu
+}
+
+case `choose` in
+  azerty)
+    setxkbmap fr oss
+    ;;
+  bépo)
+    setxkbmap fr bepo
+    ;;
+esac
