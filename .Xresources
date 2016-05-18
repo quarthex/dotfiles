@@ -1,13 +1,5 @@
-URxvt.font: xft:UbuntuMono-R
-URxvt.depth: 32
-URxvt.transparent: true
-URxvt.shading: 10
-URxvt.scrollstyle: plain
-URxvt.urgentOnBell: true
-
 ! Base16 Pop
 ! Scheme: Chris Kempson (http://chriskempson.com)
-
 #define base00 #000000
 #define base01 #202020
 #define base02 #303030
@@ -28,7 +20,6 @@ URxvt.urgentOnBell: true
 *foreground:   base05
 *background:   base00
 *cursorColor:  base05
-
 *color0:       base00
 *color1:       base08
 *color2:       base0B
@@ -37,7 +28,6 @@ URxvt.urgentOnBell: true
 *color5:       base0E
 *color6:       base0C
 *color7:       base05
-
 *color8:       base03
 *color9:       base08
 *color10:      base0B
@@ -46,12 +36,47 @@ URxvt.urgentOnBell: true
 *color13:      base0E
 *color14:      base0C
 *color15:      base07
-
-! Note: colors beyond 15 might not be loaded (e.g., xterm, urxvt),
-! use 'shell' template to set these if necessary
 *color16:      base09
 *color17:      base0F
 *color18:      base01
 *color19:      base02
 *color20:      base04
 *color21:      base06
+
+URxvt.font: xft:UbuntuMono-R
+URxvt.depth: 32
+URxvt.transparent: true
+URxvt.shading: 10
+URxvt.scrollstyle: plain
+URxvt.urgentOnBell: true
+
+URxvt*background:                     #000000
+URxvt*foreground:                     #d0d0d0
+URxvt*cursorColor:                    #d0d0d0
+
+URxvt*scrollColor:                    #d0d0d0
+URxvt*highlightColor:                 #303030
+URxvt*highlightTextColor:             #b0b0b0
+
+URxvt*color0:                         #000000
+URxvt*color1:                         #eb008a
+URxvt*color2:                         #37b349
+URxvt*color3:                         #f8ca12
+URxvt*color4:                         #0e5a94
+URxvt*color5:                         #b31e8d
+URxvt*color6:                         #00aabb
+URxvt*color7:                         #d0d0d0
+URxvt*color8:                         #505050
+URxvt*color9:                         #eb008a
+URxvt*color10:                        #37b349
+URxvt*color11:                        #f8ca12
+URxvt*color12:                        #0e5a94
+URxvt*color13:                        #b31e8d
+URxvt*color14:                        #00aabb
+URxvt*color15:                        #ffffff
+URxvt*color16:                        #f29333
+URxvt*color17:                        #7a2d00
+URxvt*color18:                        #202020
+URxvt*color19:                        #303030
+URxvt*color20:                        #b0b0b0
+URxvt*color21:                        #e0e0e0

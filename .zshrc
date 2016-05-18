@@ -8,7 +8,7 @@ buildrprompt() {
     if [[ $c -eq 0 ]]; then
         echo -n "%{$fg_bold[green]%}\u2713"
     else
-        if [[ $(( $c & 0x80 )) -ne 0 ]] && [[ $(( $c & ~0x80 )) -le 64 ]]; then
+		if [[ $c -gt 128 ]] && [[ $1 -le 192 ]]; then
             c=`kill -l $(( $c & ~0x80 ))`
         fi
         echo -n "%{$fg_bold[red]%}$c"
@@ -25,11 +25,9 @@ SAVEHIST=1000
 setopt appendhistory
 
 # completion
-zstyle :compinstall filename '/home/quarthex/.zshrc'
+zstyle :compinstall filename $HOME/.zshrc
 zstyle ':completion:*' menu select
 zstyle ':completion:*:default' list-colors `dircolors`
-zstyle ':completion:*:matches' group 'yes'
-zstyle ':completion:*' group-name ''
 autoload -Uz compinit
 compinit
 
@@ -42,5 +40,5 @@ alias ll='ls -l'
 alias ..='cd ..'
 alias grep='grep --color=auto'
 
-. /etc/profile.d/fzf.zsh
+. /usr/share/fzf/key-bindings.zsh
 . /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

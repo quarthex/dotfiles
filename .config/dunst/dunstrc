@@ -149,7 +149,7 @@
 
 [frame]
     width = 3
-    color = "#000000"
+    color = "#212121"
 
 [shortcuts]
 
@@ -185,7 +185,7 @@
     timeout = 10
 
 [urgency_critical]
-    background = "#ef1e63"
+    background = "#e91e63"
     foreground = "#ffffff"
     timeout = 0
 
@@ -242,4 +242,17 @@
 #    summary = *twitter.com*
 #    urgency = normal
 #
+
+[docker-device-added]
+    appname = udiskie
+    summary = Device added
+    body    = device appeared on /dev/mapper/docker-*
+    format  = ""
+
+[docker-device-removed]
+    appname = udiskie
+    summary = Device removed
+    body    = device disappeared on /dev/mapper/docker-*
+    format  = ""
+
 # vim: ft=cfg

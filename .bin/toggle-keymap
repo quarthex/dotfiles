@@ -4,7 +4,7 @@ choose() {
   (
     echo azerty
     echo bépo
-  ) | dmenu
+  ) | dmenu -b -p keymap
 }
 
 case `choose` in
