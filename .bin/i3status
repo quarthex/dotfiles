@@ -9,6 +9,14 @@ import threading
 import time
 
 
+def color_scale(value, max):
+    colors = ['#a1b56c', '#f7ca88', '#dc9656', '#ab4642']
+    if value >= max:
+        return colors[-1]
+    else:
+        return colors[value * len(colors) // max]
+
+
 class Usage:
 
     def __init__(self, used, total):
@@ -23,8 +31,10 @@ class Usage:
         return self._used * 100 // self._total
 
     def json(self, prefix):
+        val = self.percent()
         return {
-            'full_text': '{0} {1:02d}%'.format(prefix, self.percent())
+            'full_text': '{0} {1:02d}%'.format(prefix, val),
+            'color': color_scale(val, 100)
         }
 
 
@@ -61,7 +71,7 @@ class CpuUsage:
             total = used + idle
             return self._usage.push(used, total)
 
-    def json(self):
+    def json(self, now):
         return self.usage().json('cpu')
 
 
@@ -83,16 +93,17 @@ class MemoryUsage():
 
             return Usage(total - available, total)
 
-    def json(self):
+    def json(self, now):
         return self.usage().json('mem')
 
 
 class NetworkUsage():
 
-    def __init__(self, dev):
+    def __init__(self, dev, max=None):
         self._dev = dev
-        self._total = 0
-        self._max = 0
+        self._time = None
+        self._total = None
+        self._max = max
 
     def total(self):
         with open('/proc/net/dev') as dev:
@@ -103,23 +114,19 @@ class NetworkUsage():
                 if line.startswith(self._dev + ': '):
                     return int(line.split()[1])
 
-    def usage(self):
+    def json(self, now):
         total = self.total()
         try:
-            if self._total:
-                diff = total - self._total
-                if diff > self._max:
-                    self._max = diff
-                return Usage(diff, self._max)
+            if self._time:
+                rate = (total - self._total) // (now - self._time)
+                full_text = '{0} {1:03d}K'.format(self._dev, rate // 1024)
+                obj = {'full_text': full_text}
+                if self._max:
+                    obj['color'] = color_scale(rate, self._max)
+                return obj
         finally:
             self._total = total
-
-    def json(self):
-        usage = self.usage()
-        if usage:
-            return {
-                'full_text': '{0} {1:03d}K'.format(self._dev, usage.used() // 1024),
-            }
+            self._time = now
 
 
 class Imap:
@@ -156,7 +163,7 @@ class Imap:
         con.logout()
         self._unseen = unseen
 
-    def json(self):
+    def json(self, now):
         if self._unseen:
             return {
                 'full_text': '{0} {1}'.format(self._label, self._unseen),
@@ -169,18 +176,19 @@ class DateTime:
     def __init__(self):
         locale.resetlocale()
 
-    def json(self):
-        return {'full_text': time.strftime('%a %e %b %H:%M:%S')}
-
+    def json(self, now):
+        now = time.localtime(now)
+        now = time.strftime('%a %e %b %H:%M:%S', now)
+        return {'full_text': now}
 
 
 class AudioVolume:
 
     def __init__(self):
         self._tic = -1
-        self._prev = None
+        self._vol = None
 
-    def json(self):
+    def json(self, now):
         if self._tic % 5 == 0:
             vol = self._vol
         else:
@@ -191,7 +199,6 @@ class AudioVolume:
             return {'full_text': 'mute', 'urgent': True}
         else:
             return {'full_text': 'snd {0:02d}%'.format(vol)}
-
 
     @staticmethod
     def volume():
@@ -217,7 +224,8 @@ if __name__ == '__main__':
     sys.stdout.write('{"version": 1}\n[\n')
 
     while True:
-        st = [x.json() for x in status]
+        now = int(time.time())
+        st = [x.json(now) for x in status]
         st = [x for x in st if x is not None]
         sys.stdout.write(json.dumps(st) + ',\n')
         sys.stdout.flush()
