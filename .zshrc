@@ -3,18 +3,30 @@
 # prompt
 autoload -Uz colors
 colors
+vimode() {
+    if [ "$KEYMAP" = vicmd ]; then
+        echo "%{$fg_bold[red]%}"
+    else
+        echo "%{$fg_bold[white]%}"
+    fi
+}
+zle-keymap-select() {
+    zle reset-prompt
+    zle -R
+}
+zle -N zle-keymap-select
 buildrprompt() {
     local c=$?
     if [[ $c -eq 0 ]]; then
         echo -n "%{$fg_bold[green]%}\u2713"
     else
-		if [[ $c -gt 128 ]] && [[ $1 -le 192 ]]; then
+        if [[ $c -gt 128 ]] && [[ $1 -le 192 ]]; then
             c=`kill -l $(( $c & ~0x80 ))`
         fi
         echo -n "%{$fg_bold[red]%}$c"
     fi
 }
-PROMPT="%{$fg_bold[white]%}%~ "
+PROMPT='$(vimode)%~ '
 RPROMPT='$(buildrprompt) %{$fg_no_bold[blue]%}%T%{%b%f%k%}'
 setopt promptsubst
 
