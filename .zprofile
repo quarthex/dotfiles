@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 # external media auto mounter
-pgrep udiskie >/dev/null || ( udiskie -a 2>&1 & disown )
+pgrep udiskie >/dev/null || udiskie -a &
 
 # num lock
 setleds -D +num
