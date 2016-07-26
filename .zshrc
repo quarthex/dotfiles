@@ -52,5 +52,6 @@ alias ll='ls -l'
 alias ..='cd ..'
 alias grep='grep --color=auto'
 
+. /usr/share/fzf/completion.zsh
 . /usr/share/fzf/key-bindings.zsh
 . /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
