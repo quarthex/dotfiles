@@ -114,16 +114,29 @@ class NetworkUsage():
                 if line.startswith(self._dev + ': '):
                     return int(line.split()[1])
 
+    def ip(self):
+        proc = subprocess.Popen(
+            ['ip', 'addr', 'show', 'dev', self._dev], stdout=subprocess.PIPE)
+        stdout, _ = proc.communicate()
+        x = stdout.index(b'inet ') + 5
+        y = stdout.index(b'/', x)
+        return stdout[x:y].decode('ascii')
+
     def json(self, now):
         total = self.total()
         try:
             if self._time:
-                rate = (total - self._total) // (now - self._time)
-                full_text = '{0} {1:03d}K'.format(self._dev, rate // 1024)
-                obj = {'full_text': full_text}
-                if self._max:
-                    obj['color'] = color_scale(rate, self._max)
-                return obj
+                try:
+                    ip = self.ip()
+                except ValueError:
+                    return {'full_text': self._dev + ' down'}
+                else:
+                    rate = (total - self._total) // (now - self._time)
+                    full_text = '{0} {1:03d}K'.format(ip, rate // 1024)
+                    obj = {'full_text': full_text}
+                    if self._max:
+                        obj['color'] = color_scale(rate, self._max)
+                    return obj
         finally:
             self._total = total
             self._time = now
@@ -173,12 +186,14 @@ class Imap:
 
 class DateTime:
 
-    def __init__(self):
+    def __init__(self, format=None, offset=0):
+        self._fmt = format or '%a %e %b %H:%M:%S'
+        self._off = offset
         locale.resetlocale()
 
     def json(self, now):
-        now = time.localtime(now)
-        now = time.strftime('%a %e %b %H:%M:%S', now)
+        now = time.localtime(now + self._off)
+        now = time.strftime(self._fmt, now)
         return {'full_text': now}
 
 
