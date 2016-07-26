@@ -49,6 +49,7 @@ URxvt.transparent: true
 URxvt.shading: 10
 URxvt.scrollstyle: plain
 URxvt.urgentOnBell: true
+URxvt.saveLines: 10000
 
 URxvt*background:                     #000000
 URxvt*foreground:                     #d0d0d0
