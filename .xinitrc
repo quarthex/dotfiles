@@ -5,9 +5,9 @@ setxkbmap fr oss &
 xrdb -merge ~/.Xresources &
 wait
 
-redshift &
 dunst &
 pidgin &
+redshift &
 xautolock -locker 'i3lock -c 1b1918' &
 
 exec i3
