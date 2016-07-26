@@ -1,13 +1,13 @@
 #!/bin/sh
 sh ~/.fehbg
+numlockx &
 setxkbmap fr oss &
-xautolock -locker 'i3lock -c 1b1918' &
 xrdb -merge ~/.Xresources &
 wait
 
-firefox & disown
-redshift & disown
-dunst & disown
-pidgin & disown
+redshift &
+dunst &
+pidgin &
+xautolock -locker 'i3lock -c 1b1918' &
 
 exec i3
