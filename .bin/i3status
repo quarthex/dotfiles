@@ -10,7 +10,7 @@ import time
 
 
 def color_scale(value, max):
-    colors = ['#a1b56c', '#f7ca88', '#dc9656', '#ab4642']
+    colors = ['#8BD649', '#FFCC00', '#EA9560', '#EC5F67']
     if value >= max:
         return colors[-1]
     else:

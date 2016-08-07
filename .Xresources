@@ -1,103 +1,53 @@
-! Base16 Pop
-! Scheme: Chris Kempson (http://chriskempson.com)
+! Base16 Materia
+! Scheme: Defman21
 
-#define base00 #000000
-#define base01 #202020
-#define base02 #303030
-#define base03 #505050
-#define base04 #b0b0b0
-#define base05 #d0d0d0
-#define base06 #e0e0e0
-#define base07 #ffffff
-#define base08 #eb008a
-#define base09 #f29333
-#define base0A #f8ca12
-#define base0B #37b349
-#define base0C #00aabb
-#define base0D #0e5a94
-#define base0E #b31e8d
-#define base0F #7a2d00
+#define base00 #263238
+#define base01 #2C393F
+#define base02 #37474F
+#define base03 #707880
+#define base04 #C9CCD3
+#define base05 #CDD3DE
+#define base06 #D5DBE5
+#define base07 #FFFFFF
+#define base08 #EC5F67
+#define base09 #EA9560
+#define base0A #FFCC00
+#define base0B #8BD649
+#define base0C #80CBC4
+#define base0D #89DDFF
+#define base0E #82AAFF
+#define base0F #EC5F67
 
-*foreground:   base05
-*background:   base00
-*cursorColor:  base05
+*.foreground:   base05
+*.background:   base00
+*.cursorColor:  base05
 
-*color0:       base00
-*color1:       base08
-*color2:       base0B
-*color3:       base0A
-*color4:       base0D
-*color5:       base0E
-*color6:       base0C
-*color7:       base05
+*.color0:       base00
+*.color1:       base08
+*.color2:       base0B
+*.color3:       base0A
+*.color4:       base0D
+*.color5:       base0E
+*.color6:       base0C
+*.color7:       base05
 
-*color8:       base03
-*color9:       base08
-*color10:      base0B
-*color11:      base0A
-*color12:      base0D
-*color13:      base0E
-*color14:      base0C
-*color15:      base07
+*.color8:       base03
+*.color9:       base08
+*.color10:      base0B
+*.color11:      base0A
+*.color12:      base0D
+*.color13:      base0E
+*.color14:      base0C
+*.color15:      base07
 
 ! Note: colors beyond 15 might not be loaded (e.g., xterm, urxvt),
 ! use 'shell' template to set these if necessary
-*color16:      base09
-*color17:      base0F
-*color18:      base01
-*color19:      base02
-*color20:      base04
-*color21:      base06
-
-! URxvt*tintColor:                      color
-! URxvt*fadeColor:                      color
-
-URxvt*background:                     #000000
-URxvt*foreground:                     #d0d0d0
-URxvt*cursorColor:                    #d0d0d0
-
-! URxvt*colorBD:                        color
-! URxvt*colorIT:                        color
-! URxvt*colorUL:                        color
-! URxvt*colorRV:                        color
-! URxvt*underlineColor:                 color
-URxvt*scrollColor:                    #d0d0d0
-! URxvt*troughColor:                    color
-URxvt*highlightColor:                 #303030
-URxvt*highlightTextColor:             #b0b0b0
-! URxvt*cursorColor2:                   color
-! URxvt*pointerColor:                   color
-! URxvt*pointerColor2:                  color
-! URxvt*borderColor:                    color
-! URxvt*tab-bg:                         colour
-! URxvt*tab-fg:                         colour
-! URxvt*tabbar-bg:                      colour
-! URxvt*tabbar-fg:                      colour
-
-URxvt*color0:                         #000000
-URxvt*color1:                         #eb008a
-URxvt*color2:                         #37b349
-URxvt*color3:                         #f8ca12
-URxvt*color4:                         #0e5a94
-URxvt*color5:                         #b31e8d
-URxvt*color6:                         #00aabb
-URxvt*color7:                         #d0d0d0
-URxvt*color8:                         #505050
-URxvt*color9:                         #eb008a
-URxvt*color10:                        #37b349
-URxvt*color11:                        #f8ca12
-URxvt*color12:                        #0e5a94
-URxvt*color13:                        #b31e8d
-URxvt*color14:                        #00aabb
-URxvt*color15:                        #ffffff
-
-! 256 color space
-URxvt*color16:                        #f29333
-URxvt*color17:                        #7a2d00
-URxvt*color18:                        #202020
-URxvt*color19:                        #303030
-URxvt*color20:                        #b0b0b0
-URxvt*color21:                        #e0e0e0
+*.color16:      base09
+*.color17:      base0F
+*.color18:      base01
+*.color19:      base02
+*.color20:      base04
+*.color21:      base06
 
 URxvt.font: xft:UbuntuMono-R
 URxvt.depth: 32
