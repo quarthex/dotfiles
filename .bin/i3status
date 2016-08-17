@@ -20,7 +20,7 @@ def color_scale(value, max):
 class Usage:
 
     def __init__(self, used, total):
-        assert 0 <= used <= total
+        assert 0 <= used <= total, (used, total)
         self._used = used
         self._total = total
 
@@ -41,18 +41,18 @@ class Usage:
 class DiffUsage:
 
     def __init__(self):
-        self._usage = None
         self._used = 0
         self._total = 0
 
     def push(self, used, total):
-        assert 0 <= used <= total
+        assert 0 <= used <= total, (used, total)
         assert used >= self._used
         assert total >= self._total
-        self._usage = Usage(used - self._used, total - self._total)
+        dused, dtotal = used - self._used, total - self._total
         self._used = used
         self._total = total
-        return self._usage
+        assert dused * 0.95 <= dtotal, (dused, dtotal) # tolerance
+        return Usage(min(dused, dtotal), dtotal)
 
 
 class CpuUsage:
@@ -142,6 +142,23 @@ class NetworkUsage():
             self._time = now
 
 
+class DiskUsage:
+
+    def __init__(self, disk):
+        self._disk = disk
+        self._usage = DiffUsage()
+
+    def usage(self, now):
+        with open('/sys/block/' + self._disk + '/stat') as stat:
+            line = stat.readline().strip().split()
+            assert len(line) <= 11
+            used, total = int(line[9]), now * 1000
+            return self._usage.push(used, total)
+
+    def json(self, now):
+        return self.usage(now).json(self._disk)
+
+
 class Imap:
 
     def __init__(self, label, host, user, password, mailboxes=None, ssl=False, delay=3600):
@@ -229,8 +246,9 @@ class AudioVolume:
 
 if __name__ == '__main__':
     status = []
+    status.append(NetworkUsage('enp1s0'))
+    status.append(DiskUsage('sda'))
     status.append(CpuUsage())
-    status.append(NetworkUsage('enp2s3'))
     status.append(MemoryUsage())
     status.append(AudioVolume())
     status.append(Imap('gml', 'imap.gmail.com', '<user>', '<password>', ssl=True, delay=60))
