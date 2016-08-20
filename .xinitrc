@@ -8,6 +8,6 @@ wait
 dunst &
 pidgin &
 redshift &
-xautolock -locker 'i3lock -c 1b1918' &
+xautolock -locker 'i3lock-wrapper' &
 
 exec i3
