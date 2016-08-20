@@ -51,7 +51,6 @@ class DiffUsage:
         dused, dtotal = used - self._used, total - self._total
         self._used = used
         self._total = total
-        assert dused * 0.95 <= dtotal, (dused, dtotal) # tolerance
         return Usage(min(dused, dtotal), dtotal)
 
 
