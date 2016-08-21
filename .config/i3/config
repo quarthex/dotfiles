@@ -192,6 +192,7 @@ bar {
 }
 
 focus_follows_mouse no
+for_window [class="URxvt"] border pixel
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
 bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- ummute
 bindsym XF86AudioMute        exec amixer -q set Master toggle
