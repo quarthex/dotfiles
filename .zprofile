@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 # external media auto mounter
-pgrep udiskie >/dev/null || udiskie -a &
+pgrep udiskie >/dev/null || udiskie &
 
 # num lock
 [[ -n "$XDG_VTNR" ]] && setleds -D +num
