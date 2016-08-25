@@ -6,7 +6,7 @@ set   backspace=indent,eol,start
 set   colorcolumn=80
 set   cursorline
 set noexpandtab
-set nohlsearch
+set   hlsearch
 set   incsearch
 set   list
 set   listchars=tab:»\ ,trail:.
