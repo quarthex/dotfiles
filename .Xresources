@@ -57,3 +57,4 @@ URxvt.scrollstyle: plain
 URxvt.urgentOnBell: true
 URxvt.saveLines: 10000
 
+Xautolock.time: 1
