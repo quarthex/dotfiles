@@ -8,6 +8,6 @@ wait
 dunst &
 pidgin &
 redshift &
-xautolock -locker 'i3lock-wrapper' &
+xautolock -locker $HOME/.bin/i3lock-wrapper &
 
 exec i3
