@@ -1,6 +1,7 @@
 #!/bin/sh
 
+video_size=2560x1024
 f1=`mktemp -u /tmp/i3lock.XXXXXX.png`
-ffmpeg -f x11grab -video_size 2560x1024 -i $DISPLAY -vframes 1 -vf boxblur=lr=3 $f1
+ffmpeg -f x11grab -video_size $video_size -i $DISPLAY -vframes 1 -vf eq=saturation=0.5,boxblur=lr=3 $f1
 i3lock -i $f1
 rm $f1
