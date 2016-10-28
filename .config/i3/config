@@ -196,4 +196,4 @@ for_window [class="URxvt"] border pixel
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
 bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- ummute
 bindsym XF86AudioMute        exec amixer -q set Master toggle
-bindsym $mod+Shift+t         exec ~/.bin/toggle-keymap
+bindcode $mod+49             exec ~/.bin/toggle-keymap

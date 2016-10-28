@@ -1,17 +1,15 @@
 #!/bin/sh
 
-choose() {
-  (
-    echo azerty
-    echo bépo
-  ) | dmenu -b -p keymap
+xkbmap() {
+  setxkbmap -query | awk -F ': +'  '$1 == "layout" { l = $2 } $1 == "variant" { v = $2 } END { print l ":" v }'
 }
 
-case `choose` in
-  azerty)
-    setxkbmap fr oss
-    ;;
-  bépo)
-    setxkbmap fr bepo
-    ;;
+toggle() {
+  setxkbmap $1 $2
+  notify-send -t 2 $1:$2 "switched to layout $1 variant $2"
+}
+
+case `xkbmap` in
+  fr:oss)  toggle fr bepo ;;
+  fr:bepo) toggle fr oss  ;;
 esac
