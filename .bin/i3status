@@ -146,9 +146,13 @@ class DiskUsage:
     def __init__(self, disk):
         self._disk = disk
         self._usage = DiffUsage()
+        self._path = '/sys/block/'
+        if len(disk) == 4 and disk[-1] in '123456789':
+            self._path += disk[:-1] + '/'
+        self._path += disk + '/stat'
 
     def usage(self, now):
-        with open('/sys/block/' + self._disk + '/stat') as stat:
+        with open(self._path) as stat:
             line = stat.readline().strip().split()
             assert len(line) <= 11
             used, total = int(line[9]), now * 1000
