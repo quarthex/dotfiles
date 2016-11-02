@@ -51,6 +51,7 @@ alias ls='ls --color=auto'
 alias ll='ls -l'
 alias ..='cd ..'
 alias grep='grep --color=auto'
+alias minicom='minicom -c on'
 
 . /usr/share/fzf/completion.zsh
 . /usr/share/fzf/key-bindings.zsh
