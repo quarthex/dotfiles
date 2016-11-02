@@ -3,10 +3,11 @@
 import imaplib
 import json
 import locale
-import sys
 import subprocess
+import sys
 import threading
 import time
+import traceback
 
 
 def color_scale(value, max):
@@ -31,11 +32,12 @@ class Usage:
         return self._used * 100 // self._total
 
     def json(self, prefix):
-        val = self.percent()
-        return {
-            'full_text': '{0} {1:02d}%'.format(prefix, val),
-            'color': color_scale(val, 100)
-        }
+        if self._total:
+            val = self.percent()
+            return {
+                'full_text': '{0} {1:02d}%'.format(prefix, val),
+                'color': color_scale(val, 100)
+            }
 
 
 class DiffUsage:
@@ -124,7 +126,7 @@ class NetworkUsage():
     def json(self, now):
         total = self.total()
         try:
-            if self._time:
+            if self._time and now != self._time:
                 try:
                     ip = self.ip()
                 except ValueError:
@@ -247,7 +249,16 @@ class AudioVolume:
             return int(line[-3][1:-2])
 
 
-if __name__ == '__main__':
+def main():
+    def safe_json(obj, now):
+        try:
+            return obj.json(now)
+        except AssertionError as err:
+            return {
+                'full_text': str(err),
+                'urgent': True
+            }
+
     status = []
     status.append(NetworkUsage('enp1s0'))
     status.append(DiskUsage('sda'))
@@ -261,8 +272,16 @@ if __name__ == '__main__':
 
     while True:
         now = int(time.time())
-        st = [x.json(now) for x in status]
+        st = [safe_json(x, now) for x in status]
         st = [x for x in st if x is not None]
         sys.stdout.write(json.dumps(st) + ',\n')
         sys.stdout.flush()
         time.sleep(1)
+
+
+if __name__ == '__main__':
+    try:
+        main()
+    except:
+        with open('/tmp/i3status.err', 'w') as handle:
+            handle.write(traceback.format_exc())
