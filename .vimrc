@@ -22,6 +22,27 @@ set   wildignore=*.class
 " CtrlP
 let g:ctrlp_match_window_reversed = 0
 
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_polulate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['standard']
+function FindStandardJs()
+	let s:modulesdir = finddir('node_modules', '.;/')
+	if s:modulesdir != ''
+		let s:exec = s:modulesdir . '/.bin/standard'
+		if executable(s:exec)
+			let g:syntastic_javascript_standard_exec = s:exec
+		endif
+	endif
+endfunction
+autocmd Filetype javascript call FindStandardJs()
+
+
 if ! &diff
 	syntax enable
 endif
