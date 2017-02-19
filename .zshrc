@@ -53,6 +53,17 @@ alias ..='cd ..'
 alias grep='grep --color=auto'
 alias minicom='minicom -c on'
 
-. /usr/share/fzf/completion.zsh
-. /usr/share/fzf/key-bindings.zsh
-. /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [ -d /usr/share/fzf ]
+then
+    . /usr/share/fzf/completion.zsh
+    . /usr/share/fzf/key-bindings.zsh
+else
+    echo 'missing: fzf' >&2
+fi
+
+if [ -d /usr/share/zsh/plugins/zsh-syntax-highlighting ]
+then
+    . /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+else
+    echo 'missing: zsh-syntax-highlighting' >&2
+fi
