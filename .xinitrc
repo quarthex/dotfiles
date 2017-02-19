@@ -1,7 +1,7 @@
 #!/bin/sh
 sh ~/.fehbg
 numlockx &
-setxkbmap fr oss &
+setxkbmap fr bepo &
 xrdb -merge ~/.Xresources &
 wait
 
