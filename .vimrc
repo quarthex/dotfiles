@@ -48,3 +48,6 @@ if ! &diff
 endif
 
 nnoremap <C-n> :set relativenumber!<CR>
+
+highlight CursorLine   cterm=none
+highlight CursorLineNr cterm=inverse
