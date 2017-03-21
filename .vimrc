@@ -42,7 +42,6 @@ function FindStandardJs()
 endfunction
 autocmd Filetype javascript call FindStandardJs()
 
-
 if ! &diff
 	syntax enable
 endif
@@ -51,3 +50,13 @@ nnoremap <C-n> :set relativenumber!<CR>
 
 highlight CursorLine   cterm=none
 highlight CursorLineNr cterm=inverse
+
+filetype off
+set runtimepath+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'Townk/vim-autoclose'
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'vim-syntastic/syntastic'
+call vundle#end()
+filetype plugin indent on
