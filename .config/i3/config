@@ -196,4 +196,6 @@ for_window [class="URxvt"] border pixel
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
 bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- ummute
 bindsym XF86AudioMute        exec amixer -q set Master toggle
+bindsym Print                exec "scrot -u -e 'notify-send scrot $f' /tmp/screenshot-%s.png"
+bindsym Shift+Print          exec "scrot -m -e 'notify-send scrot $f' /tmp/screenshot-%s.png"
 bindcode $mod+49             exec ~/.bin/toggle-keymap
