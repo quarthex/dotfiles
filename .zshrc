@@ -3,31 +3,26 @@
 # prompt
 autoload -Uz colors
 colors
-vimode() {
-    if [ "$KEYMAP" = vicmd ]
-    then
-        echo "%{$fg_bold[red]%}"
-    else
-        echo "%{$fg_bold[white]%}"
-    fi
-}
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' formats " %{$fg_no_bold[magenta]%}\uE0A0%b%u%c"
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' stagedstr "%{$fg_bold[yellow]%}!"
+zstyle ':vcs_info:*' unstagedstr "%{$fg_bold[red]%}!"
+precmd() { vcs_info }
 zle-keymap-select() {
     zle reset-prompt
     zle -R
 }
 zle -N zle-keymap-select
 buildprompt() {
-    local ref
-    if ref=`git symbolic-ref HEAD 2>/dev/null` \
-    || ref=`git rev-parse --short HEAD 2>/dev/null`
+    if [ "$KEYMAP" = vicmd ]
     then
-        echo -n " %{$fg_no_bold[magenta]%}\uE0A0${ref#refs/heads/}"
-        local dirty
-        if [[ -n `git status --porcelain | head -n1` ]]
-        then
-            echo -n "%{$fg[red]%}!"
-        fi
+        echo -n "%{$fg_bold[red]%}"
+    else
+        echo -n "%{$fg_bold[white]%}"
     fi
+
+    echo "%~$vcs_info_msg_0_"
 }
 buildrprompt() {
     local c=$?
@@ -42,7 +37,7 @@ buildrprompt() {
         echo -n "%{$fg_bold[red]%}$c"
     fi
 }
-PROMPT='$(vimode)%~$(buildprompt) '
+PROMPT='$(buildprompt) '
 RPROMPT='$(buildrprompt) %{$fg_no_bold[blue]%}%T%{%b%f%k%}'
 setopt promptsubst
 
