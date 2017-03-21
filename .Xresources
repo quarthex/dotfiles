@@ -49,7 +49,7 @@
 *.color20:      base04
 *.color21:      base06
 
-URxvt.font: xft:UbuntuMono-R
+URxvt.font: xft:Ubuntu Mono derivative Powerline
 URxvt.depth: 32
 URxvt.transparent: true
 URxvt.shading: 10

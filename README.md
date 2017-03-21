@@ -18,6 +18,7 @@ A list of package I have installed on my system
 * [purple-facebook](https://github.com/jgeboski/purple-facebook)
 * [redshift](http://jonls.dk/redshift/)
 * [rxvt-unicode](http://software.schmorp.de/pkg/rxvt-unicode.html)
+* [ttf-ubuntu-mono-derivative-powerline-git](https://github.com/powerline/font)
 * [udiskie](https://pypi.python.org/pypi/udiskie)
 * [youtube-dl](http://rg3.github.io/youtube-dl/)
 * [zsh](http://www.zsh.org/)
