@@ -4,7 +4,7 @@
 autoload -Uz colors
 colors
 autoload -Uz vcs_info
-zstyle ':vcs_info:*' formats " %{$fg_no_bold[magenta]%}\uE0A0%b%u%c"
+zstyle ':vcs_info:*' formats "%{$fg_no_bold[magenta]%}"$'\ue0a0%b%u%c '
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' stagedstr "%{$fg_bold[yellow]%}!"
 zstyle ':vcs_info:*' unstagedstr "%{$fg_bold[red]%}!"
@@ -22,7 +22,7 @@ buildprompt() {
         echo -n "%{$fg_bold[white]%}"
     fi
 
-    echo "%~$vcs_info_msg_0_"
+    echo "%~"
 }
 buildrprompt() {
     local c=$?
@@ -38,7 +38,7 @@ buildrprompt() {
     fi
 }
 PROMPT='$(buildprompt) '
-RPROMPT='$(buildrprompt) %{$fg_no_bold[blue]%}%T%{%b%f%k%}'
+RPROMPT='$(buildrprompt) $vcs_info_msg_0_%{$fg_no_bold[blue]%}%T%{%b%f%k%}'
 setopt promptsubst
 
 # history
