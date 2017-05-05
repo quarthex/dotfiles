@@ -148,7 +148,7 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 # lock screen
-bindsym $mod+Shift+l exec "~/.bin/i3lock-wrapper"
+bindsym $mod+Shift+l exec "~/.local/bin/i3lock-wrapper"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -179,7 +179,7 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-    status_command ~/.bin/i3status
+    status_command ~/.local/bin/i3status
     colors {
         separator $base0D
         background $base00
@@ -198,4 +198,4 @@ bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- ummute
 bindsym XF86AudioMute        exec amixer -q set Master toggle
 bindsym Print                exec "scrot -u -e 'notify-send scrot $f' /tmp/screenshot-%s.png"
 bindsym Shift+Print          exec "scrot -m -e 'notify-send scrot $f' /tmp/screenshot-%s.png"
-bindcode $mod+49             exec ~/.bin/toggle-keymap
+bindcode $mod+49             exec ~/.local/bin/toggle-keymap
