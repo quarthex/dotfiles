@@ -132,7 +132,7 @@ class NetworkUsage():
                 except ValueError:
                     return {'full_text': self._dev + ' down'}
                 else:
-                    rate = (total - self._total) // (now - self._time)
+                    rate = int((total - self._total) / (now - self._time))
                     full_text = '{0} {1:03d}K'.format(ip, rate // 1024)
                     obj = {'full_text': full_text}
                     if self._max:
@@ -271,7 +271,7 @@ def main():
     sys.stdout.write('{"version": 1}\n[\n')
 
     while True:
-        now = int(time.time())
+        now = time.time()
         st = [safe_json(x, now) for x in status]
         st = [x for x in st if x is not None]
         sys.stdout.write(json.dumps(st) + ',\n')
