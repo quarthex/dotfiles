@@ -157,7 +157,7 @@ class DiskUsage:
         with open(self._path) as stat:
             line = stat.readline().strip().split()
             assert len(line) <= 11
-            used, total = int(line[9]), now * 1000
+            used, total = int(line[9]), int(now * 1000)
             return self._usage.push(used, total)
 
     def json(self, now):
