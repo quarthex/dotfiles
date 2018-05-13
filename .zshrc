@@ -4,7 +4,7 @@
 autoload -Uz colors
 colors
 autoload -Uz vcs_info
-zstyle ':vcs_info:*' formats "%{$fg_no_bold[magenta]%}"$'\ue0a0%b%u%c '
+zstyle ':vcs_info:*' formats "%{$fg_no_bold[magenta]%}"$'\uf126 %b%u%c '
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' stagedstr "%{$fg_bold[yellow]%}!"
 zstyle ':vcs_info:*' unstagedstr "%{$fg_bold[red]%}!"
