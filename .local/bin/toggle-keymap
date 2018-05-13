@@ -5,11 +5,11 @@ xkbmap() {
 }
 
 toggle() {
-  setxkbmap $1 $2
-  notify-send -t 2 $1:$2 "switched to layout $1 variant $2"
+  setxkbmap -geometry typematrix -model tm2030USB -layout $1 -variant $2
+  notify-send -t 2000 $1:$2 "switched to layout $1 variant $2"
 }
 
 case `xkbmap` in
-  fr:oss)  toggle fr bepo ;;
-  fr:bepo) toggle fr oss  ;;
+  fr:oss|fr:) toggle fr bepo ;;
+  fr:bepo)    toggle fr oss  ;;
 esac
