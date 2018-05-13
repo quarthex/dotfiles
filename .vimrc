@@ -14,13 +14,18 @@ set   modeline
 set   number
 set   scrolloff=3
 set   shiftwidth=4
+set   smartindent
 set   tabstop=4
 set   title
 set   visualbell t_vb=
 set   wildignore=*.class
+set   wildmenu
 
 " CtrlP
 let g:ctrlp_match_window_reversed = 0
+
+" NERDTree
+map <F2> :NERDTreeToggle<ESC>
 
 " Syntastic
 set statusline+=%#warningmsg#
@@ -41,6 +46,7 @@ function FindStandardJs()
 	endif
 endfunction
 autocmd Filetype javascript call FindStandardJs()
+let g:syntastic_python_checkers = ['pylama', 'python']
 
 if ! &diff
 	syntax enable
@@ -56,6 +62,7 @@ set runtimepath+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'Townk/vim-autoclose'
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'davidhalter/jedi-vim'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'vim-syntastic/syntastic'
 call vundle#end()
