@@ -1,6 +1,6 @@
 #!/bin/sh
-
-video_size=2560x1024
+exec 2>/dev/null
+video_size=`xrandr | awk '$1=="VGA-1" { split($4,a,/\+/) ; print a[1] ; exit }'`
 f1=`mktemp -u /tmp/i3lock.XXXXXX.png`
 ffmpeg -f x11grab -video_size $video_size -i $DISPLAY -vframes 1 -vf eq=saturation=0.5,boxblur=lr=3 $f1
 i3lock -i $f1
