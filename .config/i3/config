@@ -52,9 +52,9 @@ bindsym Mod1+Tab             exec rofi -show window
 bindsym Ctrl+Mod1+Delete     exec termite -e glances
 bindsym Print                exec "scrot -u -e 'notify-send scrot $f' /tmp/screenshot-%s.png"
 bindsym Shift+Print          exec "scrot -m -e 'notify-send scrot $f' /tmp/screenshot-%s.png"
-bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && paplay ~/.config/i3/bubble.wav && pkill -RTMIN+1 i3blocks
 bindsym XF86AudioMute        exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+1 i3blocks
-bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && paplay ~/.config/i3/bubble.wav && pkill -RTMIN+1 i3blocks
 bindsym XF86Calculator       exec termite -e ghci
 bindsym XF86HomePage         exec "pgrep firefox || firefox"; [class="Firefox"] focus
 
@@ -127,7 +127,7 @@ bar {
 	i3bar_command i3bar -t
 	status_command i3blocks -c .config/i3/i3blocks.conf
 	# dock|hide|invisible
-	mode hide
+	mode dock
 	# hide|show
 	hidden_state hide
 	# <Modifier>|none
