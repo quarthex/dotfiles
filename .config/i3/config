@@ -49,7 +49,7 @@ bindcode $mod+Shift+116 move down
 bindsym $mod+Delete          kill
 bindsym $mod+Shift+Delete    exec i3menu
 bindsym Mod1+Tab             exec rofi -show window
-bindsym Ctrl+Mod1+Delete     exec termite -e glances
+bindsym Ctrl+Mod1+Delete     exec termite -e 'glances --tree'
 bindsym Print                exec "scrot -u -e 'notify-send scrot $f' /tmp/screenshot-%s.png"
 bindsym Shift+Print          exec "scrot -m -e 'notify-send scrot $f' /tmp/screenshot-%s.png"
 bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && paplay ~/.config/i3/bubble.wav && pkill -RTMIN+1 i3blocks
@@ -87,7 +87,8 @@ set $aqua        #689d6a
 set $blue        #458588
 set $purple      #b16286
 
-exec compton
+exec --no-startup-id compton
+exec --no-startup-id polybar status
 
 #                        border  background    text    indicator  child_border
 client.focused           $aqua   $black        $aqua   $black     $aqua
@@ -122,48 +123,6 @@ focus_on_window_activation urgent
 
 # yes|no
 show_marks yes
-
-bar {
-	i3bar_command i3bar -t
-	status_command i3blocks -c .config/i3/i3blocks.conf
-	# dock|hide|invisible
-	mode dock
-	# hide|show
-	hidden_state hide
-	# <Modifier>|none
-	modifier $mod
-	# top|bottom
-	position bottom
-	# primary|<output>
-	#output primary
-	# none|primary|<output>
-	#tray_output primary
-	tray_padding 2
-	font pango: Fira Mono 11
-	separator_symbol "|"
-	# yes|no
-	workspace_buttons yes
-	# yes|no
-	strip_workspace_numbers no
-	# yes|no
-	binding_mode_indicator yes
-
-	colors {
-		background          $transparent
-		statusline          $white
-		separator           $aqua
-		#focused_background $transparent
-		#focused_statusline $white
-		#focused_separator  $transparent
-
-		#                  border       background   text
-		focused_workspace  $transparent $transparent $orange
-		active_workspace   $transparent $transparent $white
-		inactive_workspace $transparent $transparent $white
-		urgent_workspace   $red         $red         $black
-		binding_mode       $red         $red         $black
-	}
-}
 
 # inner|outer <px>
 gaps inner 4

@@ -1,0 +1,83 @@
+[colors]
+black  = #282828
+red    = #cc241d
+green  = #98971a
+yellow = #d79921
+blue   = #458588
+purple = #b16286
+aqua   = #689d6a
+white  = #a89984
+orange = #d65d0e
+bg = #cc282828
+fg = #ebdbb2
+
+[bar/status]
+monitor = VGA-0
+modules-left = i3
+modules-right = network disk-io cpu memory volume date
+bottom = true
+background = ${colors.bg}
+foreground = ${colors.fg}
+line-size = 4
+module-margin = 1
+font-0 = Fira Mono:pixelsize=11;5
+font-1 = Font Awesome 5 Free Regular;5
+font-2 = Font Awesome 5 Free Solid;5
+tray-position = right
+wm-restack = i3
+
+[module/i3]
+type = internal/i3
+label-focused = %index%
+label-focused-foreground = ${colors.orange}
+label-focused-padding = 1
+label-unfocused = %index%
+label-unfocused-padding = 1
+label-urgent = %index%
+label-urgent-foreground = ${colors.black}
+label-urgent-background = ${colors.red}
+label-urgent-overline = ${colors.red}
+label-urgent-padding = 1
+
+[module/network]
+type = internal/network
+interface = enp2s3
+label-connected = %local_ip%  %downspeed%  %upspeed%
+format-connected-overline = ${colors.orange}
+format-connected-prefix = " "
+label-disconnected = down
+format-disconnected-overline = ${colors.red}
+format-disconnected-prefix = " "
+
+[module/disk-io]
+type = custom/script
+exec = disk-io sda
+tail = true
+label = %output:2%
+format-prefix = " "
+format-suffix = %
+format-overline = ${colors.aqua}
+
+[module/cpu]
+type = internal/cpu
+format-prefix = " "
+label = %percentage:2%%
+format-overline = ${colors.yellow}
+
+[module/memory]
+type = internal/memory
+format-prefix = " "
+format-overline = ${colors.blue}
+
+[module/volume]
+type = internal/volume
+format-volume-prefix = " "
+format-volume-overline = ${colors.green}
+format-muted-prefix = " "
+format-muted-overline = ${colors.red}
+
+[module/date]
+type = custom/script
+exec = date "+%a %d %b %T"
+format-prefix = " "
+format-overline = ${colors.purple}
