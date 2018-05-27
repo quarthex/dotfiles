@@ -73,12 +73,10 @@ Colors comes from [grubox](https://github.com/morhetz/gruvbox).
 *   [Gource](http://gource.io/): VCS history visualization toy.
 *   [i3-gaps](https://github.com/Airblader/i3):
     Fork of i3 tiling window manager. See [config](.config/i3/config).
-    *   [i3blocks](http://vivien.github.io/i3blocks/):
-        Generate status line for i3bar.
-        See [i3blocks.conf](.config/i3/i3blocks.conf).
-        *   [sysstat](http://pagesperso-orange.fr/sebastien.godard/): used by i3blocks
     *   [i3lock](https://i3wm.org/i3lock/): Screen locker
         See [i3lock-wrapper](.local/bin/i3lock-wrapper).
+    *   [Polybar](https://github.com/jaagr/polybar): Status bar
+        See [config](.config/polybar/config).
 *   [Inkscape](https://inkscape.org/): Vector graphics editor.
 *   [Kdenlive](https://www.kdenlive.org/): Video editor.
 *   [Klavaro](http://klavaro.sourceforge.net/):
