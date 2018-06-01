@@ -42,7 +42,7 @@ label-urgent-padding = 1
 [module/network]
 type = internal/network
 interface = enp2s3
-label-connected = %local_ip%  %downspeed%  %upspeed%
+label-connected = %local_ip%  %downspeed:8%  %upspeed:7%
 format-connected-overline = ${colors.orange}
 format-connected-prefix = " "
 label-disconnected = down
