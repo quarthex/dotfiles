@@ -5,6 +5,7 @@ menu() {
 Exit i3
 Reload i3 configuration
 Restart i3
+Lock screen
 END
 }
 
@@ -12,4 +13,6 @@ case `menu | rofi -dmenu -p Menu -i -format i` in
 	0) i3-msg exit ;;
 	1) i3-msg reload ;;
 	2) i3-msg restart ;;
+	3) sleep 1
+	   i3lock-wrapper ;;
 esac
