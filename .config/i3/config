@@ -46,8 +46,8 @@ bindcode $mod+114       focus right
 bindcode $mod+Shift+114 move right
 bindcode $mod+116       focus down
 bindcode $mod+Shift+116 move down
-bindsym $mod+Delete          kill
-bindsym $mod+Shift+Delete    exec i3menu
+bindsym $mod+Escape          kill
+bindsym $mod+Shift+Escape    exec i3menu
 bindsym Mod1+Tab             exec rofi -show window
 bindsym Ctrl+Mod1+Delete     exec termite -e 'glances --tree'
 bindsym Print                exec "scrot -u -e 'notify-send scrot $f' /tmp/screenshot-%s.png"
