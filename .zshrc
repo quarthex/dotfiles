@@ -46,11 +46,13 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 setopt appendhistory
+setopt histignorealldups sharehistory
 
 # completion
-zstyle :compinstall filename $HOME/.zshrc
 zstyle ':completion:*' menu select
-zstyle ':completion:*:default' list-colors `dircolors`
+zstyle ':completion:*' verbose true
+eval "$(dircolors -b)"
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 autoload -Uz compinit
 compinit
 
@@ -64,6 +66,13 @@ alias ..='cd ..'
 alias grep='grep --color=auto'
 alias minicom='minicom -c on'
 
+# install Vundle
+if ! [ -d ~/.vim/bundle ]
+then
+    git clone https://github.com/VundleVim/vundle.vim.git ~/.vim/bundle/Vundle.vim
+    vim +PluginInstall +qall
+fi
+
 if [ -d /usr/share/fzf ]
 then
     . /usr/share/fzf/completion.zsh
@@ -72,9 +81,9 @@ else
     echo 'missing: fzf' >&2
 fi
 
-if [ -d /usr/share/zsh/plugins/zsh-syntax-highlighting ]
-then
-    . /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-else
-    echo 'missing: zsh-syntax-highlighting' >&2
-fi
+[ -f ~/.local/bin/antigen.zsh ] || curl -L git.io/antigen >~/.local/bin/antigen.zsh
+. ~/.local/bin/antigen.zsh
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-completions
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen apply
