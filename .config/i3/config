@@ -26,7 +26,6 @@ bindcode $mod+30        layout tabbed
 bindcode $mod+31        split v
 bindcode $mod+32        split h
 bindcode $mod+33        floating toggle
-bindcode $mod+36        exec termite
 bindcode $mod+44        focus left
 bindcode $mod+Shift+44  move left
 bindcode $mod+45        focus down
@@ -36,16 +35,17 @@ bindcode $mod+Shift+46  move up
 bindcode $mod+47        focus right
 bindcode $mod+Shift+47  move right
 bindcode $mod+49        exec ~/.local/bin/toggle-keymap
-bindcode $mod+65        exec "rofi -modi drun,run -show drun"
-bindcode $mod+110       focus parent
-bindcode $mod+111       focus up
-bindcode $mod+Shift+111 move up
-bindcode $mod+113       focus left
-bindcode $mod+Shift+113 move left
-bindcode $mod+114       focus right
-bindcode $mod+Shift+114 move right
-bindcode $mod+116       focus down
-bindcode $mod+Shift+116 move down
+bindsym $mod+Return          exec termite
+bindsym $mod+space           exec "rofi -modi drun,run -show drun"
+bindsym $mod+Home            focus parent
+bindsym $mod+Up              focus up
+bindsym $mod+Shift+Up        move up
+bindsym $mod+Left            focus left
+bindsym $mod+Shift+Left      move left
+bindsym $mod+Right           focus right
+bindsym $mod+Shift+Right     move right
+bindsym $mod+Down            focus down
+bindsym $mod+Shift+Down      move down
 bindsym $mod+Escape          kill
 bindsym $mod+Shift+Escape    exec i3menu
 bindsym Mod1+Tab             exec rofi -show window
