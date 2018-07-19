@@ -7,7 +7,7 @@ usage() {
 
 [ $# -eq 1 ] && [ -e /sys/block/$1 ] || usage
 
-read_used() { 
+read_used() {
   awk '{ print $10 }' </sys/block/$1/stat
 }
 

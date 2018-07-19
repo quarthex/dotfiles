@@ -59,7 +59,6 @@ Colors comes from [grubox](https://github.com/morhetz/gruvbox).
 *   [Atom](https://atom.io/): Agnostic text editor.
     It is a bit memory-consuming.
 *   [Audacity](https://www.audacityteam.org): Audio editor.
-*   [Compton](https://github.com/chjj/compton): Compositor for X.
 *   [DiffPDF](https://gitlab.com/eang/diffpdf): Compares PDF files side-by-side.
 *   [Dolphin Emulator](http://www.dolphin-emu.org/): GameCube & Wii emulator.
 *   [dunst](https://dunst-project.org/):

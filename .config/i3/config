@@ -87,7 +87,6 @@ set $aqua        #689d6a
 set $blue        #458588
 set $purple      #b16286
 
-exec --no-startup-id compton
 exec --no-startup-id polybar status
 
 #                        border  background    text    indicator  child_border
