@@ -22,6 +22,11 @@ buildprompt() {
         echo -n "%{$fg_bold[white]%}"
     fi
 
+    if [ -n "$SSH_CONNECTION" ]
+    then
+        echo -n `hostname`' '
+    fi
+
     echo "%~"
 }
 buildrprompt() {
