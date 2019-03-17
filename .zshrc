@@ -71,8 +71,14 @@ alias ..='cd ..'
 alias grep='grep --color=auto'
 alias minicom='minicom -c on'
 
+# install rustup
+if ! [ -d ~/.cargo/bin ]
+then
+	curl https://sh.rustup.rs -sSf | sh
+fi
+
 # install Vundle
-if ! [ -d ~/.vim/bundle ]
+if ! [ -d ~/.vim/bundle/Vundle.vim ]
 then
     git clone https://github.com/VundleVim/vundle.vim.git ~/.vim/bundle/Vundle.vim
     vim +PluginInstall +qall
