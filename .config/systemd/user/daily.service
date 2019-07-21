@@ -1,0 +1,5 @@
+[Unit]
+Description=Daily routine
+
+[Service]
+ExecStart=/home/koneko/.local/bin/systemd-daily

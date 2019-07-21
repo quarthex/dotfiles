@@ -1,0 +1,9 @@
+[Unit]
+Description=Daily routine
+
+[Install]
+WantedBy=timers.target
+
+[Timer]
+OnCalendar=daily
+Persistent=true

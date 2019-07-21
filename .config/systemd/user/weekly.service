@@ -1,0 +1,5 @@
+[Unit]
+Description=Weekly routine
+
+[Service]
+ExecStart=/home/koneko/.local/bin/systemd-weekly
