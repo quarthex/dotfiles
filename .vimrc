@@ -22,10 +22,21 @@ set   wildignore=*.class
 set   wildmenu
 
 " CtrlP
-let g:ctrlp_match_window_reversed = 0
+let g:ctrlp_regexp = 1
+let g:ctrlp_match_window = 'order:ttb,results:0'
+let g:ctrlp_extensions = ['buffertag']
 
-" NERDTree
-map <F2> :NERDTreeToggle<ESC>
+" Rust
+if executable('rls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'rls',
+        \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
+        \ 'whitelist': ['rust'],
+        \ })
+endif 
+
+" Signify
+let g:signify_vcs_list = ['git', 'svn']
 
 " Syntastic
 set statusline+=%#warningmsg#
@@ -52,8 +63,6 @@ if ! &diff
 	syntax enable
 endif
 
-nnoremap <C-n> :set relativenumber!<CR>
-
 highlight CursorLine   cterm=none
 highlight CursorLineNr cterm=inverse
 
@@ -62,8 +71,24 @@ set runtimepath+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'Townk/vim-autoclose'
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'mhinz/vim-signify'
+Plugin 'prabirshrestha/async.vim'
+Plugin 'prabirshrestha/asyncomplete-lsp.vim'
+Plugin 'prabirshrestha/asyncomplete.vim'
+Plugin 'prabirshrestha/vim-lsp'
+Plugin 'rust-lang/rust.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'vim-airline/vim-airline'
 Plugin 'vim-syntastic/syntastic'
 call vundle#end()
 filetype plugin indent on
+
+" Commands mapping
+
+nnoremap <C-n> :set relativenumber!<CR>
+map <F7> :NERDTreeToggle<CR>
+map <F8> :Tagbar<CR>

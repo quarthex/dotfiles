@@ -1,0 +1,8 @@
+#!/bin/zsh -ex
+zsh -i -c "antigen update"
+sudo pacman -Syu --downloadonly --noconfirm
+if pacman -Qu
+then
+	notify-send 'system upgrade is ready'
+fi
+rustup update stable
