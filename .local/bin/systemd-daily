@@ -6,3 +6,4 @@ then
 	notify-send 'system upgrade is ready'
 fi
 rustup update stable
+vim +VundleUpdate +qa
