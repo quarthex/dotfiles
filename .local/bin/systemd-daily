@@ -1,5 +1,9 @@
 #!/bin/zsh -ex
 zsh -i -c "antigen update"
+while [ -d /var/lib/pacman/db.lck ]
+do
+	sleep 3
+done
 sudo pacman -Syu --downloadonly --noconfirm
 if pacman -Qu
 then
