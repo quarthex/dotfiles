@@ -21,6 +21,9 @@ set   visualbell t_vb=
 set   wildignore=*.class
 set   wildmenu
 
+" Black
+autocmd BufWritePre *.py execute ':Black'
+
 " CtrlP
 let g:ctrlp_regexp = 1
 let g:ctrlp_match_window = 'order:ttb,results:0'
