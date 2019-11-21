@@ -1,5 +1,5 @@
 #!/bin/zsh -ex
-while [ -d /var/lib/pacman/db.lck ]
+while [ -f /var/lib/pacman/db.lck ]
 do
 	sleep 3
 done
