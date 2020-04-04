@@ -49,14 +49,14 @@ bindsym $mod+Shift+Down      move down
 bindsym $mod+Escape          kill
 bindsym $mod+Shift+Escape    exec i3menu
 bindsym Mod1+Tab             exec rofi -show window
-bindsym Ctrl+Mod1+Delete     exec termite -e glances
+bindsym Ctrl+Mod1+Delete     exec termite -e btm
 bindsym Print                exec "scrot -u -e 'notify-send scrot $f' /tmp/screenshot-%s.png"
 bindsym Shift+Print          exec "scrot -m -e 'notify-send scrot $f' /tmp/screenshot-%s.png"
 bindsym XF86AudioLowerVolume exec pulsemixer --change-volume -5 && paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga
 bindsym XF86AudioMute        exec pulsemixer --toggle-mute
 bindsym XF86AudioRaiseVolume exec pulsemixer --change-volume +5 && paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga
 bindsym XF86Calculator       exec termite -e python
-bindsym XF86HomePage         exec "pgrep firefox || firefox"; [class="Firefox"] focus
+bindsym XF86HomePage         exec "pgrep firefox || firefox"; [class="firefox"] focus
 
 floating_modifier $mod
 
@@ -87,11 +87,13 @@ set $aqua        #689d6a
 set $blue        #458588
 set $purple      #b16286
 
+exec --no-startup-id picom -b
 exec --no-startup-id dunst
 # play a welcome sound
 exec --no-startup-id mplayer ~/.config/i3/startup.mp3
 exec --no-startup-id polybar status
 exec --no-startup-id redshift
+exec --no-startup-id riot-desktop --hidden
 
 #                        border  background    text    indicator  child_border
 client.focused           $aqua   $black        $aqua   $black     $aqua
