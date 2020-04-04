@@ -4,7 +4,7 @@ while [ -f /var/lib/pacman/db.lck ]
 do
 	sleep 3
 done
-sudo pacman -Syu --downloadonly --noconfirm
+sudo pacman -Sy
 if pacman -Qu
 then
 	notify-send 'system upgrade is ready'
