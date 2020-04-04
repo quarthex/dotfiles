@@ -14,5 +14,5 @@ case `menu | rofi -dmenu -p Menu -i -format i` in
 	1) i3-msg reload ;;
 	2) i3-msg restart ;;
 	3) sleep 1
-	   i3lock-wrapper ;;
+	   i3lock -B0 -k;;
 esac
