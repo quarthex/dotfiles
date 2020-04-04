@@ -92,6 +92,7 @@ else
     echo 'missing: fzf' >&2
 fi
 
+mkdir -p ~/.local/bin
 [ -f ~/.local/bin/antigen.zsh ] || curl -L git.io/antigen >~/.local/bin/antigen.zsh
 . ~/.local/bin/antigen.zsh
 antigen bundle zsh-users/zsh-autosuggestions
