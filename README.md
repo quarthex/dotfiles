@@ -52,6 +52,7 @@ Colors comes from [grubox](https://github.com/morhetz/gruvbox).
 
 ## Graphical applications
 
+-   [Alacritty](https://github.com/alacritty/alacritty): Virtual terminal.
 -   [Audacity](https://www.audacityteam.org): Audio editor.
 -   [DiffPDF](https://gitlab.com/eang/diffpdf): Compares PDF files side-by-side.
 -   [Dolphin Emulator](http://www.dolphin-emu.org/): GameCube & Wii emulator.
@@ -93,9 +94,6 @@ Colors comes from [grubox](https://github.com/morhetz/gruvbox).
 -   [Simple Scan](https://gitlab.gnome.org/GNOME/simple-scan): Scanning utility.
 -   [Steam](https://store.steampowered.com/): Gaming platform.
     DotA killed Tremulous. :'(
--   [Termite](https://github.com/thestinger/termite/): Virtual terminal.
-    URxvt doesn't handle the Font Awesome typeface.
-    See [config](.config/termite/config).
 -   [VirtualBox](http://virtualbox.org): Virtualization.
 -   [VSCodium](https://vscodium.com/): Agnostic text editor.
     It run way smoother than [Atom](https://atom.io/).

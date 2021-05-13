@@ -35,7 +35,7 @@ bindcode $mod+Shift+46  move up
 bindcode $mod+47        focus right
 bindcode $mod+Shift+47  move right
 bindcode $mod+49        exec ~/.local/bin/toggle-keymap
-bindsym $mod+Return          exec termite
+bindsym $mod+Return          exec alacritty
 bindsym $mod+space           exec "rofi -modi drun,run -show drun"
 bindsym $mod+Home            focus parent
 bindsym $mod+Up              focus up
@@ -49,13 +49,13 @@ bindsym $mod+Shift+Down      move down
 bindsym $mod+Escape          kill
 bindsym $mod+Shift+Escape    exec i3menu
 bindsym Mod1+Tab             exec rofi -show window
-bindsym Ctrl+Mod1+Delete     exec termite -e btm
+bindsym Ctrl+Mod1+Delete     exec alacritty -e btm
 bindsym Print                exec "scrot -u -e 'notify-send scrot $f' /tmp/screenshot-%s.png"
 bindsym Shift+Print          exec "scrot -m -e 'notify-send scrot $f' /tmp/screenshot-%s.png"
 bindsym XF86AudioLowerVolume exec pulsemixer --change-volume -5 && paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga
 bindsym XF86AudioMute        exec pulsemixer --toggle-mute
 bindsym XF86AudioRaiseVolume exec pulsemixer --change-volume +5 && paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga
-bindsym XF86Calculator       exec termite -e python
+bindsym XF86Calculator       exec alacritty -e python
 bindsym XF86HomePage         exec "pgrep firefox || firefox"; [class="firefox"] focus
 
 floating_modifier $mod

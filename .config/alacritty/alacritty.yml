@@ -1,0 +1,6 @@
+import:
+  - base16-gruvbox-dark-hard.yml
+font:
+  normal:
+    family: Fira Code
+background_opacity: 0.8
