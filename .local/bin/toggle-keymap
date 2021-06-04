@@ -10,6 +10,7 @@ toggle() {
 }
 
 case `xkbmap` in
-  fr:bepo) toggle fr oss  ;;
-  *)       toggle fr bepo ;;
+  fr:bepo) toggle fr oss   ;;
+  fr:oss)  toggle us basic ;;
+  *)       toggle fr bepo  ;;
 esac
