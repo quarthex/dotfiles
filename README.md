@@ -9,7 +9,6 @@ Colors comes from [grubox](https://github.com/morhetz/gruvbox).
 -   [bottom](https://github.com/ClementTsang/bottom):
     Process/system monitor written in Rust ❤️.
 -   [DNSCrypt](https://dnscrypt.info/): Secure domain name resolution.
-    Have a look at [Quad9](https://www.quad9.net/) for an additional protection against online threats.
 -   [etckeeper](https://etckeeper.branchable.com/):
     Store /etc in a VCS repository like git.
     It is a way to backup the system configuration.
